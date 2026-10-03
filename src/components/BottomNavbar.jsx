@@ -14,31 +14,34 @@ const BottomNavbar = () => {
   ];
 
   return (
-    // lg:hidden คือคำสั่งซ่อน BottomNav ทันทีเมื่อหน้าจอใหญ่กว่ามือถือ
-    <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 flex justify-around items-center h-[70px] px-2 z-40 shadow-[0_-4px_15px_-3px_rgba(0,0,0,0.05)] pb-safe">
-      {navItems.map(item => {
-        // เช็คว่าหน้าปัจจุบันตรงกับเมนูนี้หรือไม่
-        const isActive = location.pathname === item.path;
-        
-        return (
-          <Link
-            key={item.id}
-            to={item.path}
-            className={`flex flex-col items-center justify-center w-full h-full space-y-1 transition-all duration-200 ${
-              isActive 
-                ? 'text-blue-600 transform -translate-y-1' 
-                : 'text-slate-400 hover:text-slate-600'
-            }`}
-          >
-            <div className={`${isActive ? 'bg-blue-50 p-1.5 rounded-xl' : 'p-1.5'}`}>
-              {item.icon}
-            </div>
-            <span className={`text-[10px] ${isActive ? 'font-bold' : 'font-medium'}`}>
-              {item.name}
-            </span>
-          </Link>
-        );
-      })}
+    // 🌟 1. ใช้ lg:hidden ครอบไว้ชั้นนอกสุด เพื่อซ่อนแถบนี้เมื่อเปิดบนจอคอมพิวเตอร์
+    <div className="lg:hidden">
+      
+      {/* 🌟 2. เรียกใช้ class "bottom-navbar" ที่เราตั้งค่าพื้นหลังกระจกโปร่งแสงไว้ใน index.css */}
+      <div className="bottom-navbar">
+        {navItems.map(item => {
+          // เช็คว่าหน้าปัจจุบันตรงกับเมนูนี้หรือไม่
+          const isActive = location.pathname === item.path;
+          
+          return (
+            <Link
+              key={item.id}
+              to={item.path}
+              // 🌟 3. เรียกใช้ class "nav-item" และเติม "active" เมื่อมีการเลือกเมนูนี้
+              // (จะเปลี่ยนเป็นสีฟ้าเรืองแสงและเด้งขึ้นด้านบน ตามที่เราตั้งไว้ใน CSS)
+              className={`nav-item ${isActive ? 'active' : ''}`}
+            >
+              <div className="p-1">
+                {item.icon}
+              </div>
+              <span className={isActive ? 'font-bold' : 'font-medium'}>
+                {item.name}
+              </span>
+            </Link>
+          );
+        })}
+      </div>
+      
     </div>
   );
 };
