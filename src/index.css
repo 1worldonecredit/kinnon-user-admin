@@ -2,90 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
-/* วางโค้ด CSS ของคุณต่อจากบรรทัดนี้ได้เลย */
-/* =========================================
-   1. Base & Variables (ลบ Layout ที่ซ้ำซ้อนออก)
-========================================= */
-/* =========================================
-   Reset & Fix ขอบจอทะลุ
-========================================= */
-*, *::before, *::after {
-  box-sizing: border-box !important;
-}
+*, *::before, *::after { box-sizing: border-box !important; }
 
 html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  max-width: 100vw;
-  overflow-x: hidden !important; /* ซ่อนแถบเลื่อนซ้าย-ขวา */
+  margin: 0; padding: 0;
+  width: 100%; max-width: 100vw;
+  overflow-x: hidden !important;
 }
 
-/* =========================================
-   🌟 ตัวแปรสี Theme Glassmorphism & ระบบ Admin
-   (แก้สีตรงนี้ จะเปลี่ยนทั้งระบบ)
-========================================= */
 :root {
-  /* ตัวแปรของเดิม (เก็บไว้กันโครงสร้างพัง) */
   --primary-color: #d11010;
   --bg-color: #f4f6f8;
   --nav-height: 65px;
   --bottom-nav-height: 75px;
 
-  /* 🌟 1. ตัวแปรสีหลัก (Primary Theme) */
-  --theme-main: #0ea5e9;        /* สีฟ้าหลัก (เหมือนภาพเรฟ Login) */
-  --theme-gradient: linear-gradient(90deg, #0ea5e9 0%, #c084fc 100%); /* ไล่สีปุ่ม/เส้นขอบ */
+  --theme-main: #0ea5e9; 
+  --theme-gradient: linear-gradient(90deg, #0ea5e9 0%, #c084fc 100%); 
 
-  /* 🌟 2. ตัวแปรสีกระจกโปร่งแสง (Glassmorphism) */
-  /* ความเข้มข้นของกระจก (เปลี่ยนจาก 0.4 เป็น 0.8 ถ้าอยากให้ทึบขึ้น) */
   --glass-bg-sidebar: rgba(15, 23, 42, 0.6); 
   --glass-bg-topbar: rgba(15, 23, 42, 0.4); 
   --glass-bg-bottombar: rgba(15, 23, 42, 0.85); 
   --glass-bg-card: rgba(30, 41, 59, 0.5);
   
-  --glass-border: rgba(255, 255, 255, 0.15); /* สีเส้นขอบโปร่งแสง */
-  --glass-blur: 16px;                        /* ความเบลอของแผ่นกระจก */
+  --glass-border: rgba(255, 255, 255, 0.15); 
+  --glass-blur: 16px; 
 
-  /* 🌟 3. ตัวแปรสีตัวอักษร (Typography Colors) */
-  --text-h1: #ffffff;
-  --text-h2: #f8fafc;
-  --text-h3: #f1f5f9;
-  --text-h4: #e2e8f0;
-  --text-h5: #cbd5e1;
-  --text-span: #94a3b8;
-  --text-icon: #0ea5e9; /* สีไอคอนตามตีมหลัก */
+  --text-h1: #ffffff; --text-h2: #f8fafc; --text-h3: #f1f5f9;
+  --text-h4: #e2e8f0; --text-h5: #cbd5e1; --text-span: #94a3b8;
+  --text-icon: #0ea5e9;
 }
 
-/* =========================================
-   🌟 แทรก: กฎมาตรฐานสำหรับตัวอักษร 
-========================================= */
 h1 { color: var(--text-h1) !important; font-weight: 800; }
 h2 { color: var(--text-h2) !important; font-weight: 700; }
 h3 { color: var(--text-h3) !important; font-weight: 600; }
 h4 { color: var(--text-h4) !important; font-weight: 600; }
 h5 { color: var(--text-h5) !important; font-weight: 500; }
-span { color: var(--text-span) !important; }
-p { color: var(--text-span) !important; }
+span, p { color: var(--text-span) !important; }
 
 
 /* =========================================
-   2. Top Navbar (ล็อก Layout เดิม, อัปเดตสีพื้นหลังกระจก)
+   Top Navbar & Bottom Navbar
 ========================================= */
 .top-navbar {
-  position: fixed !important;
-  top: 0 !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: 100% !important;
-  max-width: 100vw !important;
-  z-index: 1000 !important;
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  padding: 10px 15px !important;
-  height: 60px !important;
+  position: fixed !important; top: 0 !important; left: 50% !important;
+  transform: translateX(-50%) !important; width: 100% !important; max-width: 100vw !important;
+  z-index: 1000 !important; display: flex !important; justify-content: space-between !important;
+  align-items: center !important; padding: 10px 15px !important; height: 60px !important;
 
-  /* 🌟 อัปเดตสี Top Navbar เป็นกระจก */
   background-color: var(--glass-bg-topbar) !important;
   backdrop-filter: blur(var(--glass-blur)) !important;
   -webkit-backdrop-filter: blur(var(--glass-blur)) !important;
@@ -98,236 +61,105 @@ p { color: var(--text-span) !important; }
 .greeting p { margin: 0; font-size: 12px; color: var(--text-span); }
 .greeting h4 { margin: 0; font-size: 14px; color: var(--text-h4); }
 .top-icons { display: flex; gap: 15px; align-items: center; color: var(--text-icon); }
-
 .nav-group { display: flex; align-items: center; gap: 15px; }
 .nav-logo { margin: 0; cursor: pointer; color: var(--theme-main); font-weight: 800; }
 
-
-/* =========================================
-   3. Bottom Navbar (ล็อก Layout เดิม, อัปเดตสี)
-========================================= */
 .bottom-navbar {
-  position: fixed !important; 
-  bottom: 0 !important; 
-  left: 0 !important; 
-  right: 0 !important; 
-  width: 100% !important;
-  max-width: 100vw !important; 
-  z-index: 1000 !important;
-  display: flex !important;
-  justify-content: space-around !important;
-  align-items: center !important;
-  height: 65px !important; 
-  margin: 0 !important;
-  padding-bottom: env(safe-area-inset-bottom, 0px) !important;
+  position: fixed !important; bottom: 0 !important; left: 0 !important; right: 0 !important; 
+  width: 100% !important; max-width: 100vw !important; z-index: 1000 !important;
+  display: flex !important; justify-content: space-around !important; align-items: center !important;
+  height: 65px !important; margin: 0 !important; padding-bottom: env(safe-area-inset-bottom, 0px) !important;
   
-  /* 🌟 อัปเดตสี Bottom Navbar เป็นกระจก */
   background: var(--glass-bg-bottombar) !important; 
-  backdrop-filter: blur(var(--glass-blur)) !important;
-  -webkit-backdrop-filter: blur(var(--glass-blur)) !important;
-  border-top: 1px solid var(--glass-border) !important; 
-  box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3) !important;
-  border-top-left-radius: 20px !important; 
-  border-top-right-radius: 20px !important;
+  backdrop-filter: blur(var(--glass-blur)) !important; -webkit-backdrop-filter: blur(var(--glass-blur)) !important;
+  border-top: 1px solid var(--glass-border) !important; box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3) !important;
+  border-top-left-radius: 20px !important; border-top-right-radius: 20px !important;
 }
-
-.nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
-  color: var(--text-span); 
-  font-size: 11px;
-  gap: 5px;
-  transition: all 0.3s ease;
-}
-
-.nav-item.active, .nav-item:hover { 
-  color: var(--theme-main); 
-  transform: translateY(-3px);
-  text-shadow: 0 0 10px var(--theme-main); 
-}
+.nav-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: var(--text-span); font-size: 11px; gap: 5px; transition: all 0.3s ease; }
+.nav-item.active, .nav-item:hover { color: var(--theme-main); transform: translateY(-3px); text-shadow: 0 0 10px var(--theme-main); }
 
 
 /* =========================================
-   4. Auth & Cyber Styles (Login, Buttons, Inputs)
+   Auth Pages (แก้ไขความเพี้ยนของ Login)
 ========================================= */
 .cyber-hex-bg {
-  /* ถ้าเอาภาพมาจาก DB ในอนาคต โค้ด JS จะเขียนทับบรรทัดล่างนี้เอง */
   background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop'); 
   background-color: #0f172a;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  min-height: 100vh;
+  background-size: cover; background-position: center; background-attachment: fixed;
+  min-height: 100vh; width: 100%;
+}
+
+.page-center-vh {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: 100vh; text-align: center; padding: 20px 0;
+}
+
+/* 🌟 คลาสใหม่สำหรับกรอบ Login ให้เป็น Glassmorphism */
+.auth-glass-card {
   width: 100%;
+  max-width: 380px; /* กำหนดความกว้างเท่ากรอบเดิมของคุณ */
+  padding: 40px 30px;
+  border-radius: 24px;
+  
+  background-color: var(--glass-bg-card);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-form {
+  display: flex; flex-direction: column; gap: 20px;
+  width: 100%; margin: 0 auto;
+  position: relative; z-index: 10;
 }
 
 .cyber-input {
-  /* 🌟 ฟอร์มสไตล์กระจก */
-  background-color: rgba(0, 0, 0, 0.3) !important;
+  background-color: rgba(0, 0, 0, 0.4) !important;
   border: 1px solid var(--glass-border) !important;
   color: var(--text-h1) !important;
-  border-radius: 8px;
-  padding: 12px 15px;
-  width: 100%;
-  transition: all 0.3s ease;
+  border-radius: 8px; padding: 12px 15px; width: 100%;
+  transition: all 0.3s ease; text-align: left;
 }
-.cyber-input:focus {
-  outline: none;
-  border-color: var(--theme-main) !important;
-  box-shadow: 0 0 10px rgba(14, 165, 233, 0.3);
-}
+.cyber-input:focus { outline: none; border-color: var(--theme-main) !important; box-shadow: 0 0 10px rgba(14, 165, 233, 0.3); }
 
 .cyber-btn {
-  /* 🌟 ปุ่มสไตล์เรืองแสงตาม Theme */
-  background: var(--theme-gradient);
-  color: #ffffff;
-  border: none;
-  border-radius: 25px;
-  padding: 12px;
-  width: 100%;
-  font-weight: bold;
-  font-size: 16px;
-  cursor: pointer;
+  background: var(--theme-gradient); color: #ffffff;
+  border: none; border-radius: 25px; padding: 12px; width: 100%;
+  font-weight: bold; font-size: 16px; cursor: pointer;
   box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
   transition: transform 0.2s, box-shadow 0.2s;
 }
-.cyber-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.6);
-}
+.cyber-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(14, 165, 233, 0.6); }
 
 
 /* =========================================
-   5. Dashboard Layout & Cards (ล็อก Layout เดิม)
+   Dashboard Styles
 ========================================= */
-.app-container {
-  display: flex !important;
-  flex-direction: column !important;
-  width: 100% !important;
-  max-width: 100vw !important;
-  overflow-x: hidden !important;
-  min-height: 100vh !important;
-  background: transparent !important;
-  position: relative;
-}
+.app-container { display: flex !important; flex-direction: column !important; width: 100% !important; max-width: 100vw !important; overflow-x: hidden !important; min-height: 100vh !important; background: transparent !important; position: relative; }
+.main-content { flex-grow: 1; width: 100% !important; max-width: 500px !important; margin: 0 auto !important; padding-top: 70px !important; padding-bottom: 80px !important; }
 
-.main-content {
-  flex-grow: 1;
-  width: 100% !important;
-  max-width: 500px !important;
-  margin: 0 auto !important;
-  padding-top: 70px !important; 
-  padding-bottom: 80px !important; 
-}
+.glass-card-container { background-color: var(--glass-bg-card) !important; backdrop-filter: blur(var(--glass-blur)) !important; -webkit-backdrop-filter: blur(var(--glass-blur)) !important; border: 1px solid var(--glass-border) !important; border-radius: 16px !important; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important; }
 
-/* 🌟 แทรกคลาสสำหรับ Card กระจก (เอาไปใส่แทน class เดิมได้เลย) */
-.glass-card-container {
-  background-color: var(--glass-bg-card) !important;
-  backdrop-filter: blur(var(--glass-blur)) !important;
-  -webkit-backdrop-filter: blur(var(--glass-blur)) !important;
-  border: 1px solid var(--glass-border) !important;
-  border-radius: 16px !important;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
-}
-
-.section-title {
-  font-size: 15px;
-  font-weight: 700;
-  margin: 0 0 15px 0;
-  color: var(--text-h3); 
-}
-
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); 
-  gap: 15px 10px;
-  margin-bottom: 25px;
-}
+.section-title { font-size: 15px; font-weight: 700; margin: 0 0 15px 0; color: var(--text-h3); }
+.services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px 10px; margin-bottom: 25px; }
 .service-item { display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; }
-.service-icon-box {
-  width: 55px; height: 55px;
-  
-  /* 🌟 ไอคอนกล่องกระจก */
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(4px);
-  border: 1px solid var(--glass-border);
-  
-  border-radius: 16px;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--theme-main);
-  transition: transform 0.2s, border-color 0.2s, background 0.2s;
-}
-.service-item:hover .service-icon-box {
-  transform: translateY(-3px);
-  border-color: var(--theme-main);
-  background: rgba(255, 255, 255, 0.2);
-}
-.service-name {
-  font-size: 11px;
-  color: var(--text-span);
-  text-align: center;
-  line-height: 1.2;
-}
+.service-icon-box { width: 55px; height: 55px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(4px); border: 1px solid var(--glass-border); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: var(--theme-main); transition: transform 0.2s, border-color 0.2s, background 0.2s; }
+.service-item:hover .service-icon-box { transform: translateY(-3px); border-color: var(--theme-main); background: rgba(255, 255, 255, 0.2); }
+.service-name { font-size: 11px; color: var(--text-span); text-align: center; line-height: 1.2; }
 
-/* =========================================
-   6. 📱 โหมด Tablet / Desktop (โครงสร้างเดิมเป๊ะ 100%)
-========================================= */
 @media (min-width: 768px) {
-  .main-content {
-    max-width: 95% !important; 
-    width: 1000px !important;  
-    margin: 0 auto !important;
-    padding: 30px 20px !important;
-  }
-
+  .main-content { max-width: 95% !important; width: 1000px !important; margin: 0 auto !important; padding: 30px 20px !important; }
   .unified-wallet-card { height: 350px !important; padding: 30px 40px !important; }
   .wallet-balance h2 { font-size: 38px !important; }
   .wallet-points h3 { font-size: 22px !important; }
   .card-action-btn { font-size: 16px !important; padding: 16px !important; }
-
   .services-grid { gap: 30px 20px !important; }
   .service-icon-box { width: 80px !important; height: 80px !important; }
   .service-icon-box svg { width: 36px !important; height: 36px !important; }
   .service-name { font-size: 15px !important; font-weight: bold !important; }
-
   .section-title { font-size: 22px !important; margin-bottom: 20px !important; }
 }
-
-/* =========================================
-   หน้า Wallet 
-========================================= */
-.unified-wallet-card {
-  background-image: url('/WalletCard.jpg') !important; 
-  background-size: cover !important;
-  background-position: center top !important; 
-  border-radius: 20px !important;
-  height: 200px !important; 
-  padding: 20px !important; 
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: flex-end !important; 
-  gap: 15px !important; 
-  position: relative !important;
-  overflow: hidden !important;
-  margin-bottom: 25px !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important; 
-}
-.unified-wallet-card::before {
-  content: '' !important;
-  position: absolute !important;
-  top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
-  background: linear-gradient(to bottom, rgba(0,0,0,0) 45%, rgba(0,0,0,0.85) 100%) !important;
-  z-index: 1 !important;
-}
-.unified-wallet-card > * { position: relative !important; z-index: 2 !important; }
-.wallet-top-section { display: flex; justify-content: space-between; align-items: flex-end; }
-.wallet-balance p { margin: 0 0 35px 0; font-size: 20px; opacity: 0.9; color: var(--text-h5); }
-.wallet-balance h2 { margin: 28; font-size: 26px; font-weight: 800; letter-spacing: 0.5px; color: #fff !important; }
-.wallet-points { text-align: right; }
-.wallet-points p { margin: 0 0 4px 0; font-size: 12px; opacity: 0.9; color: #fff;}
-.wallet-points h3 { margin: 0; font-size: 16px; font-weight: 700; color: #ffd700; background: rgba(0,0,0,0.4); padding: 4px 10px; border-radius: 20px; }
-.card-actions-row { display: flex; gap: 15px; }
-.card-action-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.4); padding: 12px; border-radius: 14px; color: white; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-.card-action-btn:hover { background: rgba(255, 255, 255, 0.35); transform: translateY(-2px); }
