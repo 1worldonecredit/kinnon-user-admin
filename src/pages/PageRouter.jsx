@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { componentsRegistry } from '../utils/componentsRegistry';
 
+
 const PageRouter = () => {
   const [menus, setMenus] = useState([]);
   const location = useLocation();
